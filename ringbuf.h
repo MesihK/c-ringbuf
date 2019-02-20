@@ -240,4 +240,7 @@ ringbuf_write(int fd, ringbuf_t rb, size_t count);
 void *
 ringbuf_copy(ringbuf_t dst, ringbuf_t src, size_t count);
 
+unsigned char
+ringbuf_peak(ringbuf_t rb, size_t offset);
+
 #endif /* INCLUDED_RINGBUF_H */

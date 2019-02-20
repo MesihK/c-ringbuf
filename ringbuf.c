@@ -151,6 +151,18 @@ ringbuf_nextp(ringbuf_t rb, const uint8_t *p)
     return rb->buf + ((++p - rb->buf) % ringbuf_buffer_size(rb));
 }
 
+uint8_t
+ringbuf_peak(ringbuf_t rb, size_t offset)
+{
+    /*
+     * The assert guarantees the expression (++p - rb->buf) is
+     * non-negative; therefore, the modulus operation is safe and
+     * portable.
+     */
+
+    return *(rb->buf + (((rb->tail + offset) - rb->buf) % ringbuf_buffer_size(rb)));
+}
+
 size_t
 ringbuf_findchr(const struct ringbuf_t *rb, int c, size_t offset)
 {
